@@ -12,7 +12,8 @@ File.open("/home/matt/Learn/projects/yelp_api_key.txt", 'r') do |f|
   end
 end
 
-API_KEY = key
+API_KEY = key.chomp
+
 
 
 # Constants, do not change these
