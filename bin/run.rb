@@ -55,3 +55,4 @@ def assign_squares
 end
 
 print_board
+test_ui
