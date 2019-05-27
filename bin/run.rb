@@ -15,23 +15,20 @@ def get_id
 end
 
 def print_board
-    div0 = "----|----|----|----|----"
-    row1 = " 01 | 02 | 03 | 04 | 05 "
-    row2 = " 06 | 07 | 08 | 09 | 10 "
-    row3 = " 11 | 12 | fr | 14 | 15 "
-    row4 = " 16 | 17 | 18 | 19 | 20 "
-    row5 = " 21 | 22 | 23 | 24 | 25 "
-    puts
-    puts row1
-    puts div0
-    puts row2
-    puts div0
-    puts row3
-    puts div0
-    puts row4
-    puts div0
-    puts row5
-    puts
+    board = <<-END 
+    |----|----|----|----|----|
+    | 01 | 02 | 03 | 04 | 05 |
+    |----|----|----|----|----|
+    | 06 | 07 | 08 | 09 | 10 |
+    |----|----|----|----|----|
+    | 11 | 12 | fr | 14 | 15 |
+    |----|----|----|----|----|
+    | 16 | 17 | 18 | 19 | 20 |
+    |----|----|----|----|----|
+    | 21 | 22 | 23 | 24 | 25 |
+    |----|----|----|----|----|
+    END
+    board
 end
 
 def assign_squares
@@ -54,5 +51,5 @@ def assign_squares
     squares
 end
 
-print_board
+puts print_board
 test_ui

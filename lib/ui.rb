@@ -2,7 +2,7 @@ require 'curses'
 
 # Setup magic numbers
 SCREEN_HEIGHT      = 24
-SCREEN_WIDTH       = 80
+SCREEN_WIDTH       = 100
 HEADER_HEIGHT      = 1
 HEADER_WIDTH       = SCREEN_WIDTH
 MAIN_WINDOW_HEIGHT = SCREEN_HEIGHT - HEADER_HEIGHT
@@ -24,7 +24,8 @@ def test_ui
 
     main_window = Curses::Window.new(0,0,1,0)
 
-    main_window << "Test String!"
+    main_window.setpos(1, 0)
+    main_window << print_board
 
     main_window.refresh
 
@@ -34,12 +35,12 @@ def test_ui
     header_window << "Restaurant Bingo".center(HEADER_WIDTH)
     header_window.refresh
 
-    main_window.setpos(1, 0)
+    main_window.setpos(14, 0)
     main_window << "Press a key to get the ordinal value. Press 'q' to quit."
 
     until (input = main_window.getch) == 'q'
 
-        main_window.setpos(2, 0)
+        main_window.setpos(15, 0)
     
         main_window << "You pressed: #{input}."
 
