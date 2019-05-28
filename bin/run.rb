@@ -5,4 +5,4 @@ require_relative "../lib/command_line_interface.rb"
 binding.pry
 
 
-puts "HELLO WORLD"
+welcome
