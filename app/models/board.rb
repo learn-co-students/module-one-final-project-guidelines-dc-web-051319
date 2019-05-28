@@ -11,9 +11,8 @@ class Board < ActiveRecord::Base
                     "free"
                 else
                     id = ids.pop
-                    Square.new(placement: n, restaurant_id: id, board_id: self.id).save
+                    Square.new(restaurant_id: id, board_id: self.id, row: i, column: j).save
                 end
-                n += 1
             end
         end
     end
