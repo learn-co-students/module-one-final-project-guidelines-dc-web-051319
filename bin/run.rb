@@ -63,4 +63,19 @@ def make_users
     tif.save
 end
 
+def make_restaurants
+    get_data.each do |r|
+        Restaurant.new(yelp_id: r["id"], name: r["name"]).save
+    end
+end
+
+def make_boards
+    b1 = Board.new
+    b1.date = "April 2017"
+    b1.save
+end
+
 make_users
+make_boards
+make_restaurants
+binding.pry
