@@ -45,7 +45,7 @@ make_restaurants
 make_boards
 
 matt = User.find_by_name("Matt")
-matt.have_meal(Restaurant.all.first)
-matt.have_meal(Restaurant.all.last)
-# Restaurant.all.map{|restaurant| restaurant.id}
+matt.have_meal(Restaurant.find(Square.all.sample.restaurant_id))
+matt.have_meal(Restaurant.find(Square.all.sample.restaurant_id))
+p Board.all.first.print_board(matt)
 binding.pry
