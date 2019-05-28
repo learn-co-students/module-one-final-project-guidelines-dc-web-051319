@@ -38,4 +38,5 @@ make_restaurants
 matt = User.find_by_name("Matt")
 restaurant = Restaurant.find(1)
 matt.have_meal(restaurant)
+matt.have_meal(Restaurant.find(8))
 binding.pry
