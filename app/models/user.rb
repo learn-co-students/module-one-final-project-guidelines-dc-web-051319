@@ -7,4 +7,5 @@ class User < ActiveRecord::Base
         visit.restaurant_id = restaurant.id
         visit.save
     end
+    
 end

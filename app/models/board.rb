@@ -1,9 +1,9 @@
 class Board < ActiveRecord::Base
     has_many :squares
-
     def fill_board
-        ids = (1..50).to_a.sample(24)
-        n = 1
+        ids = Restaurant.ids.sample(24)
+        p ids 
+        n = 1 
         for i in 0..4 do
             for j in 0..4 do
                 if i == 2 && j == 2
@@ -17,7 +17,11 @@ class Board < ActiveRecord::Base
         end
     end
 
-    def print_board
+    def print_board(user)
+        array_visits = user.visits
+        array_visits.each do |visit|
+            visit.restuarant_id 
+            end 
         board = <<-END
         |----|----|----|----|----|
         | 01 | 02 | 03 | 04 | 05 |
@@ -33,4 +37,5 @@ class Board < ActiveRecord::Base
         END
         board
     end
+
 end
