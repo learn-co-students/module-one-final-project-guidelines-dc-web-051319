@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 2019_05_28_155544) do
     t.string "name"
   end
 
-  create_table "vists", force: :cascade do |t|
+  create_table "visits", force: :cascade do |t|
     t.integer "user_id"
     t.integer "restaurant_id"
     t.integer "review"

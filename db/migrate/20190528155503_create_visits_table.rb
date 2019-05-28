@@ -1,6 +1,6 @@
-class CreateVistsTable < ActiveRecord::Migration[5.2]
+class CreateVisitsTable < ActiveRecord::Migration[5.2]
     def change
-        create_table :vists do |t|
+        create_table :visits do |t|
             t.integer :user_id
             t.integer :restaurant_id
             t.integer :review

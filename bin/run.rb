@@ -75,7 +75,12 @@ def make_boards
     b1.save
 end
 
+
 make_users
 make_boards
 make_restaurants
+matt = User.find_by_name("Matt")
+restaurant = Restaurant.find(1)
+matt.have_meal(restaurant)
+puts Visit.all
 binding.pry
