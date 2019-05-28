@@ -31,12 +31,19 @@ def make_boards
     b1.fill_board
 end
 
+def clear_db
+    Board.destroy_all
+    Restaurant.destroy_all
+    Square.destroy_all
+    User.destroy_all
+    Visit.destroy_all
+end
 
+clear_db
 make_users
 make_boards
 make_restaurants
 matt = User.find_by_name("Matt")
-restaurant = Restaurant.find(1)
-matt.have_meal(restaurant)
-matt.have_meal(Restaurant.find(8))
+matt.have_meal(Restaurant.all.first)
+matt.have_meal(Restaurant.all.last)
 binding.pry
