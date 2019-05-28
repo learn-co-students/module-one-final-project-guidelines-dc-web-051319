@@ -47,5 +47,4 @@ make_boards
 matt = User.find_by_name("Matt")
 matt.have_meal(Restaurant.find(Square.all.sample.restaurant_id))
 matt.have_meal(Restaurant.find(Square.all.sample.restaurant_id))
-p Board.all.first.print_board(matt)
-binding.pry
+Board.all.first.print_board(matt)
