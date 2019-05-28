@@ -21,7 +21,7 @@ API_HOST = "https://api.yelp.com"
 SEARCH_PATH = "/v3/businesses/search"
 BUSINESS_PATH = "/v3/businesses/"  # trailing / because we append the business id to the path
 
-SEARCH_LIMIT = 24
+SEARCH_LIMIT = 250
 
 
 # Make a request to the Fusion search endpoint. Full documentation is online at:
