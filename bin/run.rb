@@ -50,6 +50,6 @@ def assign_squares
     end
     squares
 end
-
+puts assign_squares
 puts print_board
 test_ui
