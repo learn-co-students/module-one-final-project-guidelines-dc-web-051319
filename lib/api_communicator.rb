@@ -7,25 +7,33 @@ def all_cards
   response_string = RestClient.get('https://db.ygoprodeck.com/api/v4/cardinfo.php')
   response_hash = JSON.parse(response_string)
 end
-
-
-def get_monster_cards_from_api
-  monster_cards = all_cards[0].select do |hash|
+# y = gets.chomp
+def get_monster_cards_from_api(y)
+  monster_cards = all_cards[0].y.times.select do |hash|
     hash["type"] == "Normal Monster"
     end
-  puts "How Many Monster Cards Would You Like to draw"
-  x = gets.chomp.to_i
-  monster_cards.sample(x)
+    # binding.pry
+  # puts "How Many Monster Cards Would You Like to draw"
+  # x = gets.chomp.to_i
+  # cards_added = monster_cards.sample(x)
+  # puts cards_added
 end
 
 def get_trap_cards_from_api
   trap_cards = all_cards[0].select do |hash|
     hash["type"] == "Trap Card"
->>>>>>> cd3faea9d502e21f34957e654b691383a23e426a
     end
-  puts "How Many Trap Cards Would You Like to draw"
-  x = gets.chomp.to_i
-  trap_cards.sample(x)
+
+  # puts "How Many Trap Cards Would You Like to draw"
+  # x = gets.chomp.to_i
+  #  trap_cards.sample(x)
+
+end
+
+def add_trap_cards_to_deck
+
+  x = get_trap_cards_from_api
+
 end
 
 def get_specific_card
@@ -39,7 +47,10 @@ end
 end
 
 
-binding.pry
 
 
-    0
+
+# binding.pry
+    #
+    #
+    # 0
