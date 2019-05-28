@@ -1,5 +1,6 @@
 class Board < ActiveRecord::Base
     has_many :squares
+
     def fill_board
         ids = Restaurant.ids.sample(24)
         p ids 
@@ -18,11 +19,13 @@ class Board < ActiveRecord::Base
     end
 
     def print_board(user)
-        array_visits = user.visits
-        array_visits.each do |visit|
-            visit.restuarant_id 
-            end 
-        board = <<-END
+        board = [["","","","",""], ["","","","",""], ["","","*","",""], ["","","","",""], ["","","","",""]]
+        visits = user.visits
+        restaurant_ids = visits.map{ |visit| visit.restaurant_id } 
+        marked_squares = restaurant_ids.map{ |id| Square.find_by(restaurant_id: id) } 
+        div = "|----|----|----|----|----|"
+        
+        ref = <<-END
         |----|----|----|----|----|
         | 01 | 02 | 03 | 04 | 05 |
         |----|----|----|----|----|
@@ -36,6 +39,7 @@ class Board < ActiveRecord::Base
         |----|----|----|----|----|
         END
         board
+        marked_squares
     end
 
 end
