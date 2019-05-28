@@ -2,15 +2,15 @@ class Board < ActiveRecord::Base
     has_many :squares
 
     def fill_board
+        ids = (1..50).to_a.sample(24)
         n = 1
-        k = 1
         for i in 0..4 do
             for j in 0..4 do
                 if i == 2 && j == 2
                     "free"
                 else
-                    Square.new(placement: n, restaurant_id: k, board_id: self.id).save
-                    k += 1
+                    id = ids.pop
+                    Square.new(placement: n, restaurant_id: id, board_id: self.id).save
                 end
                 n += 1
             end

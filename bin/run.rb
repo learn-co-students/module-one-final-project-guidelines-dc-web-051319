@@ -1,6 +1,6 @@
 require_relative '../config/environment'
 
-def get_data(term="dinner", loc="Washington, DC")
+def get_data(term="restaurants", loc="Washington, DC")
     yelp = YelpAPI.new
     data = yelp.search(term, loc)
     data["businesses"]
@@ -38,6 +38,4 @@ make_restaurants
 matt = User.find_by_name("Matt")
 restaurant = Restaurant.find(1)
 matt.have_meal(restaurant)
-puts Visit.all
-puts Square.all
 binding.pry
