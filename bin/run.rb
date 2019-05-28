@@ -50,6 +50,17 @@ def assign_squares
     end
     squares
 end
-puts assign_squares
-puts print_board
-test_ui
+
+def make_users
+    matt = User.new
+    tim = User.new
+    tif = User.new
+    matt.name = "Matt"
+    tim.name = "Tim"
+    tif.name = "Tiffany"
+    matt.save
+    tim.save
+    tif.save
+end
+
+make_users
