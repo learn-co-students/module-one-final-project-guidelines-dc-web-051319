@@ -18,6 +18,8 @@ class Board < ActiveRecord::Base
 
     def print_board(user)
 
+        system "clear" or system "cls"
+
         board = [  ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ", "\u2B50  ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "]  ]
 
         # y = "\u2B50"

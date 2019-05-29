@@ -10,6 +10,7 @@ require_relative '../app/models/visit.rb'
 class Play
 
     def self.print_restaurant_list
+        system "clear" or system "cls"
         board = Board.first
         squares = Square.where("board_id = ?", board)
         restaurants = squares.map do |square|
@@ -31,5 +32,5 @@ class Play
         num -= 1
         return list[num]
     end
-    
+
 end
