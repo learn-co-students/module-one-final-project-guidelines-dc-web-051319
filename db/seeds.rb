@@ -1,35 +1,36 @@
-<<<<<<< HEAD
 require_relative '../config/environment.rb'
 
 Card.destroy_all
 Deck.destroy_all
 Player.destroy_all
 DeckCard.destroy_all
-=======
-require_relative '../lib/api_communicator'
-require_relative '../config/environment.rb'
-require 'pry'
 
-Card.delete_all
-# test = get_trap_cards_from_api
-#
-get_trap_cards_from_api.each do |trapcard|
-  Card.new(name: trapcard["name"], type: trapcard["type"], desc: trapcard["desc"], race: trapcard["race"])
+
+response_string = RestClient.get('https://db.ygoprodeck.com/api/v4/cardinfo.php')
+response_hash = JSON.parse(response_string)
+
+monster_card = response_hash[0].select do |card|
+    card["type"] == "Normal Monster"
 end
-# atk: nil, def: nil, level: nil, archetype: nil a
-binding.pry
 
-0
-  # create_table "cards", force: :cascade do |t|
-  #   t.string  "name"
-  #   t.string  "type"
-  #   t.text    "desc"
-  #   t.integer "atk"
-  #   t.integer "def"
-  #   t.integer "level"
-  #   t.string  "race"
-  #   t.string  "attribute"
-  #   t.string  "archetype"
-  #   t.integer "deck_id"
-  # end
->>>>>>> 77d3130706604b53628521848ad35cd080c2ba3e
+monster_card.each do |card|
+    Card.create(name: card["name"], kind: card["type"], desc: card["desc"], defense: card["def"], attack: card["atk"], level: card["level"], race: card["race"])
+end
+
+trap_card = response_hash[0].select do |card|
+    card["type"] == "Trap Card"
+end
+
+trap_card.each do |card|
+    Card.create(name: card["name"], kind: card["type"], desc: card["desc"], defense: card["def"], attack: card["atk"], level: card["level"], race: card["race"])
+end
+
+spell_card = response_hash[0].select do |card|
+    card["type"] == "Spell Card"
+end
+
+spell_card.each do |card|
+    Card.create(name: card["name"], kind: card["type"], desc: card["desc"], defense: card["def"], attack: card["atk"], level: card["level"], race: card["race"])
+end
+
+binding.pry

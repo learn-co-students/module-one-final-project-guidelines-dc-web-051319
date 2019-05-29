@@ -1,21 +1,38 @@
 require_relative '../config/environment'
-
 require_relative "../lib/api_communicator.rb"
 require_relative "../lib/command_line_interface.rb"
-<<<<<<< HEAD
-# binding.pry
 
-=======
->>>>>>> 77d3130706604b53628521848ad35cd080c2ba3e
+name_input = welcome
+#welcomes user & gets user input
+player = make_player(name_input)
+#takes input to create user
+deck_input = name_deck
+#prompts deck name
+make_deck(deck_input, player.id)
+#creates deck instance
 
-welcome
-input = gets.chomp
-player = Player.find_or_create_by(name: input)
-name_deck
-deck_name = gets.chomp
-deck = Deck.find_or_create_by(name: deck_name, player_id: player.id)
+#asks user how he would like to add cards to his deck at random or by choice?
+
+#if they decline random then user selects card by choice
+
 time_to_build
-deck_with_cards = []
+
+
+binding.pry
+0
+
+
+
+
+
+# welcome
+# input = gets.chomp
+# player = Player.find_or_create_by(name: input)
+# name_deck
+# deck_name = gets.chomp
+# deck = Deck.find_or_create_by(name: deck_name, player_id: player.id)
+# time_to_build
+# deck_with_cards = []
 
 
 # puts  "Hey Time build your deck, how many monster cards would you like?"

@@ -1,3 +1,3 @@
-class DeckCard
+class DeckCard < ActiveRecord::Base
 
 end
