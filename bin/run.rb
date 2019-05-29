@@ -58,16 +58,36 @@ until user.is_a?(User)
     user = Login.get_user
 end
 
+puts "Would you like a regular or basic board?"
+print "(R)egular/(B)asic: "
+basic = gets.chomp.downcase
+
+if basic == 'b'
+    basic = true
+else 
+    basic = false
+end
+
 quit = nil
 
 until !(quit.nil?)
     restaurants = Play.print_restaurant_list
     move = Play.go_to_restaurant?(restaurants)
     user.have_meal(move)
-    Board.first.print_board(user)
+
+    unless basic 
+        Board.first.print_board(user)
+    else
+        Board.first.print_basic_board(user)
+    end
+
+    puts ""
+
     puts Board.first.bingo?(user)
 
-    ans = gets.chomp
+    puts "Press ENTER to continue or 'q' to quit."
+    print "(Q)uit?: "
+    ans = gets.chomp.downcase
 
     if ans == 'q'
         quit = 'quit'
@@ -76,5 +96,3 @@ until !(quit.nil?)
     end
 
 end
-
-# ? puts "bingo!" :  puts "not yet!"

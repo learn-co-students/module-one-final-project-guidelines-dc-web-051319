@@ -8,6 +8,7 @@ require_relative '../app/models/board.rb'
 class Login
 
     def self.welcome
+        system "clear" or system "cls"
         puts "Welcome to Restaurant Bingo!"
     end
 

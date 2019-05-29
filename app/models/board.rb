@@ -17,20 +17,11 @@ class Board < ActiveRecord::Base
 
 
     def print_board(user)
-
         system "clear" or system "cls"
 
         board = [  ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ", "\u2B50  ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "]  ]
 
-        # y = "\u2B50"
-
-        # puts y.encode('utf-8')
-
-
         marked_squares = get_marked_squares(user)
-
-        # cross = "\u274C"
-        # puts cross.encode('utf-8')
 
         marked_squares.each do |square|
             row = square.row
@@ -38,12 +29,8 @@ class Board < ActiveRecord::Base
             board[row][column] = " \u274C "
         end
 
-
-        border = "---------------------"
-        
         div = "\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501"
 
-        puts border
         puts board[0].join("\u2503")
         puts div
         puts board[1].join("\u2503")
@@ -53,8 +40,33 @@ class Board < ActiveRecord::Base
         puts board[3].join("\u2503")
         puts div
         puts board[4].join("\u2503")
-        puts border
     end
+
+    def print_basic_board(user)
+        system "clear" or system "cls"
+
+        board = [["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   "," * ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "]]
+
+        marked_squares = get_marked_squares(user)
+
+        marked_squares.each do |square|
+            row = square.row
+            column = square.column
+            board[row][column] = " X "
+        end
+
+        div = "---|---|---|---|---"
+
+        puts board[0].join("|")
+        puts div
+        puts board[1].join("|")
+        puts div
+        puts board[2].join("|")
+        puts div
+        puts board[3].join("|")
+        puts div
+        puts board[4].join("|")
+end
 
     def get_marked_squares(user)
         visits = Visit.where("user_id = ?", user.id)
@@ -63,12 +75,25 @@ class Board < ActiveRecord::Base
         return marked_squares
     end
 
+    def diag_bingo?(marked)
+        n = 0
+        m = 0
 
-    def bingo?(user)
+        marked.each do |square|
+            case 
+            when square.row == square.column
+                n += 1
+            when square.row + square.column == 4
+                m += 1
+            end
+        end
+
+        n == 4 || m == 4 
+    end
+
+    def cross_bingo?(marked)
         rows = [2]
         columns = [2]
-
-        marked = get_marked_squares(user)
 
         marked.each do |square|
             rows << square.row
@@ -77,26 +102,6 @@ class Board < ActiveRecord::Base
 
         uniq_rows = rows.uniq.length
         uniq_columns = columns.uniq.length
-
-        # Diagonal Bingo
-        c = 0
-        marked.each do |square|
-            if square.row == square.column
-            c += 1
-            end
-        end 
-
-        return true if c == 4 
-        # return true if uniq_rows == 5 && uniq_columns == 5
-
-        c = 0 
-        marked.each do |square|
-            if square.row + square.column == 4
-            c += 1
-            end 
-        end 
-
-        return true if c == 4  
 
         # Horizontal Bingo
         row_mode = rows.max_by{ |i| rows.count(i) }
@@ -110,5 +115,18 @@ class Board < ActiveRecord::Base
         return false
     end
 
+
+    def bingo?(user)
+
+        marked = get_marked_squares(user)
+
+        bingo = diag_bingo?(marked) || cross_bingo?(marked)
+
+        if bingo
+            puts "BINGO!!!"
+        else
+            puts "So close... Maybe next time!?" 
+        end
+    end
 
 end
