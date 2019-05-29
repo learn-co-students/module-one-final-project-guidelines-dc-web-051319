@@ -39,9 +39,11 @@ class Board < ActiveRecord::Base
         end
 
 
+        border = "---------------------"
+        
+        div = "\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501"
 
-        div = "-\u2501-\u254B-\u2501-\u254B-\u2501-\u254B-\u2501-\u254B-\u2501-"
-
+        puts border
         puts board[0].join("\u2503")
         puts div
         puts board[1].join("\u2503")
@@ -51,6 +53,7 @@ class Board < ActiveRecord::Base
         puts board[3].join("\u2503")
         puts div
         puts board[4].join("\u2503")
+        puts border
     end
 
     def get_marked_squares(user)
@@ -76,13 +79,30 @@ class Board < ActiveRecord::Base
         uniq_columns = columns.uniq.length
 
         # Diagonal Bingo
+        c = 0
+        marked.each do |square|
+            if square.row == square.column
+            c += 1
+            end
+        end 
+
+        return true if c == 4 
         # return true if uniq_rows == 5 && uniq_columns == 5
+
+        c = 0 
+        marked.each do |square|
+            if square.row + square.column == 4
+            c += 1
+            end 
+        end 
+
+        return true if c == 4  
 
         # Horizontal Bingo
         row_mode = rows.max_by{ |i| rows.count(i) }
         return true if uniq_columns == 5 && rows.count(row_mode) == 5
 
-        # Vertical Bingo
+        # # Vertical Bingo
         column_mode = columns.max_by{ |j| columns.count(j) }
         return true if uniq_rows == 5 && columns.count(column_mode) == 5
 
