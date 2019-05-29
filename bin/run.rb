@@ -49,4 +49,15 @@ matt.have_meal(Restaurant.find(Square.all.sample.restaurant_id))
 matt.have_meal(Restaurant.find(Square.all.sample.restaurant_id))
 Board.all.first.print_board(matt)
 
+# Begin UI
+Login.welcome
+user = nil
 
+until user.is_a?(User)
+    user = Login.get_user
+end
+
+restaurants = Play.print_restaurant_list
+move = Play.go_to_restaurant?(restaurants)
+user.have_meal(move)
+Board.first.print_board(user)
