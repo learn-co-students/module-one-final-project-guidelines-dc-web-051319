@@ -32,17 +32,17 @@ def make_boards
 end
 
 def clear_db
-    # Board.destroy_all
-    Restaurant.destroy_all
-    # Square.destroy_all
-    User.destroy_all
-    Visit.destroy_all
+     Board.destroy_all
+     Restaurant.destroy_all
+     Square.destroy_all
+     User.destroy_all
+     Visit.destroy_all
 end
 
-clear_db
-make_users
-make_restaurants
-# make_boards
+ clear_db
+ make_users
+ make_restaurants
+ make_boards
 
 # matt = User.find_by_name("Matt")
 # matt.have_meal(Restaurant.find(Square.all.sample.restaurant_id))
@@ -58,10 +58,23 @@ until user.is_a?(User)
     user = Login.get_user
 end
 
-restaurants = Play.print_restaurant_list
-move = Play.go_to_restaurant?(restaurants)
-user.have_meal(move)
-Board.first.print_board(user)
-Board.first.bingo?(user) 
+quit = nil
+
+until !(quit.nil?)
+    restaurants = Play.print_restaurant_list
+    move = Play.go_to_restaurant?(restaurants)
+    user.have_meal(move)
+    Board.first.print_board(user)
+    puts Board.first.bingo?(user)
+
+    ans = gets.chomp
+
+    if ans == 'q'
+        quit = 'quit'
+    else
+        quit = nil
+    end
+
+end
 
 # ? puts "bingo!" :  puts "not yet!"

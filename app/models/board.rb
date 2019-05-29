@@ -28,7 +28,7 @@ class Board < ActiveRecord::Base
 
 
         marked_squares = get_marked_squares(user)
-        
+
         # cross = "\u274C"
         # puts cross.encode('utf-8')
 
@@ -54,7 +54,7 @@ class Board < ActiveRecord::Base
     end
 
     def get_marked_squares(user)
-        visits = user.visits
+        visits = Visit.where("user_id = ?", user.id)
         restaurant_ids = visits.map{ |visit| visit.restaurant_id }
         marked_squares = restaurant_ids.map{ |id| Square.find_by(restaurant_id: id) }
         return marked_squares
@@ -62,33 +62,33 @@ class Board < ActiveRecord::Base
 
 
     def bingo?(user)
-        rows = []
-        columns = []
-        
+        rows = [2]
+        columns = [2]
+
         marked = get_marked_squares(user)
-    
+
         marked.each do |square|
             rows << square.row
             columns << square.column
         end
-    
+
         uniq_rows = rows.uniq.length
         uniq_columns = columns.uniq.length
-        
+
         # Diagonal Bingo
-        return true if uniq_rows == 5 && uniq_columns == 5
-       
+        # return true if uniq_rows == 5 && uniq_columns == 5
+
         # Horizontal Bingo
         row_mode = rows.max_by{ |i| rows.count(i) }
         return true if uniq_columns == 5 && rows.count(row_mode) == 5
-        
+
         # Vertical Bingo
-        column_mode = columns.max_by{ |j| columns.count(j) } 
+        column_mode = columns.max_by{ |j| columns.count(j) }
         return true if uniq_rows == 5 && columns.count(column_mode) == 5
-        
+
         # No Bingo
         return false
     end
-    
+
 
 end
