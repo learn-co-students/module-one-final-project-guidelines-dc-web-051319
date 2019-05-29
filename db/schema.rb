@@ -10,6 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20190529140514) do
 
   create_table "cards", force: :cascade do |t|
@@ -22,6 +23,21 @@ ActiveRecord::Schema.define(version: 20190529140514) do
   create_table "deck_cards", force: :cascade do |t|
     t.integer "deck_id"
     t.integer "card_id"
+=======
+ActiveRecord::Schema.define(version: 20190528201720) do
+
+  create_table "cards", force: :cascade do |t|
+    t.string  "name"
+    t.string  "type"
+    t.text    "desc"
+    t.integer "atk"
+    t.integer "def"
+    t.integer "level"
+    t.string  "race"
+    t.string  "attribute"
+    t.string  "archetype"
+    t.integer "deck_id"
+>>>>>>> 77d3130706604b53628521848ad35cd080c2ba3e
   end
 
   create_table "decks", force: :cascade do |t|

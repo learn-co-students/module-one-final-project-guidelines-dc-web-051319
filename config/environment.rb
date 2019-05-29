@@ -9,3 +9,4 @@ ActiveRecord::Base.logger = Logger.new(STDOUT)
 
 require_all 'app'
 require_all 'lib'
+require_all 'App'
