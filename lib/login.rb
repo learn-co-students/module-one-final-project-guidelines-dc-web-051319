@@ -50,7 +50,8 @@ class Login
     end
 
     def self.config_board
-        print "Press ENTER for a regular or 'b' for a (b)asic board: "
+        puts ""
+        print "Press ENTER for a regular board or 'b' for a (b)asic board: "
         ans = gets.chomp.downcase
         ans == 'b' ? true : false
     end

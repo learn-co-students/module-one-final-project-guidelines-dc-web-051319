@@ -18,7 +18,7 @@ class Admin
 
     def self.get_restaurants
         get_data.each do |r|
-            Restaurant.new(yelp_id: r["id"], name: r["name"]).save
+            Restaurant.create(yelp_id: r["id"], name: r["name"])
         end
     end
 
