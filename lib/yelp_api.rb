@@ -56,7 +56,8 @@ def search(term, location)
   params = {
     term: term,
     location: location,
-    limit: SEARCH_LIMIT
+    limit: SEARCH_LIMIT,
+    offset: 101
   }
 
   response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)
