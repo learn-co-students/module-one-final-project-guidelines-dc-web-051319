@@ -45,6 +45,7 @@ class Login
         puts "Please select a board."
         print "1-#{list.length}: "
         num = gets.chomp.to_i
+        num = num.clamp(1, list.length)
         num -= 1
         list[num]
     end
