@@ -15,6 +15,12 @@ class Login
     def self.get_user
         print "Please enter your name: "
         name = gets.chomp
+
+        if name.downcase == "admin"
+            Login.admin
+            abort
+        end
+
         user = User.all.find{ |user| user.name.downcase == name.downcase }
         unless user.nil?
             user
@@ -33,6 +39,10 @@ class Login
         else
             return nil
         end
+    end
+
+    def self.admin
+        Admin.panel
     end
 
     def self.config_board
