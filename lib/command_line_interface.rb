@@ -1,3 +1,5 @@
+require_relative '../config/environment'
+
 def welcome
   puts "Hello, Welcome to YgoProDeck! "
   puts "Please enter your name:"
@@ -19,33 +21,45 @@ def make_deck(name, id)
 
 end
 
-def time_to_build
-  puts "Time to build your deck:"
-  puts "How would you like to add cards to your deck at random or by choice?"
-  reply = gets.chomp
-  if (reply !='yes' || reply != 'no' )
-      puts ' Please answer "yes" or "no".'
-    
 
-  elsif reply == 'yes'
-      reply = true
-  else reply == 'no'
-      reply = false
-  end
+
+def time_to_build
+  puts "The cards in your deck will be gifted  to you at random,
+  you will later be given the opportunity to add and remove cards from your deck!"
+end
+
+def make_card_deck(decks_id, cards_id)
+  deck_card.create(deck_id: decks_id, card_id: cards_id)
+end
+
+def make_carddeck
+    deck = Deck.all[1]
+    x = Card.all.sample(40)
+    # binding.pry
+    x.each do |card|
+
+    end
+
+end
+make_carddeck
+
+
+#
+# def check_reply
+#   reply = time_to_build
+#   binding.pry
+# end
+
   # if reply == true
   #   x = Card.all.sample(40)
   #   x.each do |card|
   #     card.deck = deck1
   #   else puts "Okay you can select your deck by choice"
-end
+
+
+
 
 def deck_builder
-  
+
+
 end
-
-
-# def get_monster_card_from_user
-#   puts "How many monster cards would you like to draw."
-#   input = gets.chomp.to_i
-#   monster_cards.sample(input)
-# end

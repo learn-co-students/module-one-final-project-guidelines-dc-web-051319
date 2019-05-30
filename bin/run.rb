@@ -7,19 +7,62 @@ name_input = welcome
 player = make_player(name_input)
 #takes input to create user
 deck_input = name_deck
-#prompts deck name
-make_deck(deck_input, player.id)
-#creates deck instance
+#prompts deck namee
+deck = make_deck(deck_input, player.id)
+# creates deck instance
+def make_carddeck(player)
+  empty_deck =  player.decks.first.cards
+    x = Card.all.sample(40)
+    x.each do |card|
+      empty_deck << card
 
-#asks user how he would like to add cards to his deck at random or by choice?
+    end
 
-#if they decline random then user selects card by choice
+end
+
+make_carddeck(player)
 
 time_to_build
 
+def here_deck(player)
+  here = player.decks.first.cards
+  here.each {|cards| puts cards.name}
+end
 
-binding.pry
-0
+
+
+here_deck(player)
+def name_card
+  puts "Choose a card to Put into your deck"
+  gets.chomp
+end
+
+card_name = name_card
+here = player.decks.first.cards
+
+def add_single_card(card_name)
+
+ here = player.decks.first.cards
+  card = Card.find_by(name: card_name)
+  if card
+    here << card
+    puts "You have added #{card.name}"
+  else puts "card doesnt exist"
+
+
+  end
+end
+
+add_single_card(card_name)
+# asks user how he would like to add cards to his deck at random or by choice?
+#
+# if they decline random then user selects card by choice
+
+
+
+
+# binding.pry
+# 0
 
 
 
