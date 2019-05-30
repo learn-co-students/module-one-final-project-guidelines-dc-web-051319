@@ -64,11 +64,8 @@ def remove_card(card_name, player)
   here = player.decks.first.cards
    card = here.find_by(name: card_name)
    if card
-
      here.delete(card)
-
      puts "You have deleted #{card.name}"
-     # binding.pry
    else puts "Either you don't want to remove a card or it doesn't exist in your deck"
    end
 end
@@ -78,8 +75,9 @@ def remove_card_prompt
   gets.chomp
 end
 
-delete = remove_card_prompt
-remove_card(delete, player)
+card_to_delete = remove_card_prompt
+
+remove_card(card_to_delete, player)
 
 
 
