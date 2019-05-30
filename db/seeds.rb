@@ -20,7 +20,7 @@ end
 trap_card = response_hash[0].select do |card|
     card["type"] == "Trap Card"
 end
-GU
+
 trap_card.each do |card|
     Card.create(name: card["name"], kind: card["type"], desc: card["desc"], defense: card["def"], attack: card["atk"], level: card["level"], race: card["race"])
 end

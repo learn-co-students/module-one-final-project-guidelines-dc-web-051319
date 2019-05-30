@@ -42,19 +42,16 @@ end
 card_name = name_card
 here = player.decks.first.cards
 
-def add_single_card(card_name, player)
 
+
+def add_single_card(card_name, player)
  here = player.decks.first.cards
   card = Card.find_by(name: card_name)
   if card
-
     here << card
     puts "You have added #{card.name}"
     # binding.pry
   else puts "card doesnt exist"
-#
-# binding.pry
-# 0
   end
 end
 
@@ -78,6 +75,25 @@ end
 card_to_delete = remove_card_prompt
 
 remove_card(card_to_delete, player)
+
+def find_strongest_card_prompt
+  "Heres the strongest card."
+
+end
+
+
+def find_strongest_attack_card(player)
+
+
+  cardi = player.decks.first.cards.each {|card| card.attack}
+  # binding.pry
+end
+
+end
+
+find_strongest_card_prompt
+
+find_strongest_attack_card(player)
 
 
 
