@@ -37,24 +37,23 @@ class Admin
     def self.run(choice)
         case choice
         when 'c'
-            Admin.clear_db
+            self.clear_db
         when 'r'
-            Admin.get_restaurants
+            self.get_restaurants
         when 'b'
-            Admin.make_board
+            self.make_board
         when 'u'
-            Admin.make_users
+            self.make_users
         when 'p'
             binding.pry
-        when 'q'
-            return nil
         end
     end
 
     def self.panel
         ans = ""
-        until ans == "c" || ans == "r" || ans == "b" || ans == "u" || ans == "p" || ans == "q"
-            puts "Would you like to:"
+        until ans == "q"
+            system "clear" or system "cls"
+            puts "What would you like to do?"
             puts "1. (C)lear database"
             puts "2. Get (r)estaurants from yelp"
             puts "3. Make a new (b)oard"
@@ -63,8 +62,9 @@ class Admin
             puts "6. (Q)uit"
             print "?: "
             ans = gets.chomp.downcase
+            Admin.run(ans)
         end
-        Admin.run(ans)
+        abort
     end
 
 end
