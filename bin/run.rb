@@ -37,6 +37,8 @@ def name_card
   gets.chomp
 end
 
+
+
 card_name = name_card
 here = player.decks.first.cards
 
@@ -57,9 +59,28 @@ def add_single_card(card_name, player)
 end
 
 add_single_card(card_name, player)
-# asks user how he would like to add cards to his deck at random or by choice?
-#
-# if they decline random then user selects card by choice
+
+def remove_card(card_name, player)
+  here = player.decks.first.cards
+   card = here.find_by(name: card_name)
+   if card
+
+     here.delete(card)
+
+     puts "You have deleted #{card.name}"
+     # binding.pry
+   else puts "Either you don't want to remove a card or it doesn't exist in your deck"
+   end
+end
+
+def remove_card_prompt
+ puts  "Time to remove a card"
+  gets.chomp
+end
+
+delete = remove_card_prompt
+remove_card(delete, player)
+
 
 
 
