@@ -9,6 +9,8 @@ end
 
 basic = Login.config_board
 
+board = Login.select_board
+
 quit = false
 
 until quit
@@ -16,9 +18,9 @@ until quit
     restaurant = Play.go_to_restaurant?(options)
     user.have_meal(restaurant)
 
-    basic ? Board.first.print_basic_board(user) : Board.first.print_board(user)
+    basic ? board.print_basic_board(user) : board.print_board(user)
 
-    puts Board.first.bingo?(user)
+    board.bingo?(user)
 
     quit = Login.exit
 end

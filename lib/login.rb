@@ -41,8 +41,21 @@ class Login
         end
     end
 
-    def self.admin
-        Admin.panel
+    def self.select_board
+        system "clear" or system "cls"
+
+        boards = Board.all
+
+        puts ""
+        boards.each_with_index do |board, i|
+            puts "#{i+1}. #{board.date}"
+        end
+        puts ""
+        puts "Please select a board:"
+        print "1-#{boards.length}?: "
+        num = gets.chomp.to_i
+        num -= 1
+        boards[num]
     end
 
     def self.config_board
@@ -56,5 +69,9 @@ class Login
         print "(Q)uit?: "
         ans = gets.chomp.downcase
         ans == 'q' ? true : false
+    end
+
+    def self.admin
+        Admin.panel
     end
 end
