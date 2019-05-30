@@ -14,8 +14,8 @@ board = Login.select_board
 quit = false
 
 until quit
-    options = Play.print_restaurant_list
-    restaurant = Play.go_to_restaurant?(options)
+    restaurant = board.print_restaurant_list(user)
+
     user.have_meal(restaurant)
 
     basic ? board.print_basic_board(user) : board.print_board(user)

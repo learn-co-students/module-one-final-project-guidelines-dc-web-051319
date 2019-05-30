@@ -1,9 +1,4 @@
 require_relative '../config/environment.rb'
-require_relative '../app/models/user.rb'
-require_relative '../app/models/visit.rb'
-require_relative '../app/models/restaurant.rb'
-require_relative '../app/models/square.rb'
-require_relative '../app/models/board.rb'
 
 class Login
 
@@ -17,8 +12,7 @@ class Login
         name = gets.chomp
 
         if name.downcase == "admin"
-            Login.admin
-            abort
+            Admin.panel
         end
 
         user = User.all.find{ |user| user.name.downcase == name.downcase }
@@ -30,6 +24,7 @@ class Login
     end
 
     def self.new_user(name)
+        system "clear" or system "cls"
         puts "It appears that you haven't played before."
         puts "Would you like to register as a new user?"
         print "(Y)es/(N)o: "
@@ -43,16 +38,12 @@ class Login
 
     def self.select_board
         system "clear" or system "cls"
-
-        boards = Board.all
-
-        puts ""
-        boards.each_with_index do |board, i|
+        Board.all.each_with_index do |board, i|
             puts "#{i+1}. #{board.date}"
         end
         puts ""
-        puts "Please select a board:"
-        print "1-#{boards.length}?: "
+        puts "Please select a board."
+        print "1-#{boards.length}: "
         num = gets.chomp.to_i
         num -= 1
         boards[num]
@@ -71,7 +62,4 @@ class Login
         ans == 'q' ? true : false
     end
 
-    def self.admin
-        Admin.panel
-    end
 end

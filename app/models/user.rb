@@ -7,5 +7,8 @@ class User < ActiveRecord::Base
         visit.restaurant_id = restaurant.id
         visit.save
     end
-    
+
+    def get_visit_list
+        Visit.where("user_id = ?", self.id)
+    end
 end

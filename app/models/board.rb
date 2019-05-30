@@ -15,9 +15,34 @@ class Board < ActiveRecord::Base
         end
     end
 
+    def print_restaurant_list(user)
+        system "clear" or system "cls"
+
+        squares = Square.where("board_id = ?", self.id)
+        restaurants = squares.map do |square|
+            Restaurant.find_by(id: square.restaurant_id)
+        end
+
+        visited_restaurants = user.get_visit_list.map{ |visit| visit.restaurant_id }
+        restaurants.select do |restaurant|
+            !(visited_restaurants.include?(restaurant.id))
+        end
+
+        sorted = restaurants.sort_by{ |restaurant| restaurant.name }
+
+        sorted.each_with_index do |restaurant, i|
+            puts "#{i+1}. #{restaurant.name}"
+        end
+        puts ""
+        puts "Where would you like to go?"
+        print "1-#{sorted.length}: "
+        num = gets.chomp.to_i
+        num -= 1
+        return sorted[num]
+    end
+
     def get_marked_squares(user)
-        visits = Visit.where("user_id = ?", user.id)
-        restaurant_ids = visits.map{ |visit| visit.restaurant_id }
+        restaurant_ids = user.get_visit_list.map{ |visit| visit.restaurant_id }
         marked = restaurant_ids.map{ |id| Square.find_by(restaurant_id: id) }
         marked << Square.new(row: 2, column: 2)
         return marked
@@ -40,7 +65,7 @@ class Board < ActiveRecord::Base
             end
         end
 
-    
+
         div = "\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501"
         puts ""
         puts board[0].join("\u2503")
@@ -73,7 +98,7 @@ class Board < ActiveRecord::Base
         end
 
         div = "---|---|---|---|---"
-
+        puts ""
         puts board[0].join("|")
         puts div
         puts board[1].join("|")
