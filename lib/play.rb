@@ -25,7 +25,7 @@ class Play
 
     def self.go_to_restaurant?(list)
         puts "Where would you like to go?"
-        print "1-24:"
+        print "1-24: "
         num = gets.chomp.to_i
         num -= 1
         return list[num]

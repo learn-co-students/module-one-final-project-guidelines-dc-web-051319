@@ -13,7 +13,7 @@ class Login
     end
 
     def self.get_user
-        print "Please enter your name:  "
+        print "Please enter your name: "
         name = gets.chomp
         user = User.all.find{ |user| user.name.downcase == name.downcase }
         unless user.nil?
@@ -36,7 +36,7 @@ class Login
     end
 
     def self.config_board
-        print "Press ENTER for a regular or 'b' for a (b)asic board:"
+        print "Press ENTER for a regular or 'b' for a (b)asic board: "
         ans = gets.chomp.downcase
         ans == 'b' ? true : false
     end
