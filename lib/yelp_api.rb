@@ -51,13 +51,13 @@ SEARCH_LIMIT = 50
 #        }
 #
 # Returns a parsed json object of the request
-def search(term, location)
+def search(term, location, offset)
   url = "#{API_HOST}#{SEARCH_PATH}"
   params = {
     term: term,
     location: location,
     limit: SEARCH_LIMIT,
-    offset: 101
+    offset: offset
   }
 
   response = HTTP.auth("Bearer #{API_KEY}").get(url, params: params)

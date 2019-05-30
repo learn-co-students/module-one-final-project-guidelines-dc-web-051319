@@ -10,14 +10,16 @@ class Admin
         Visit.destroy_all
     end
 
-    def self.get_data(term="restaurants", loc="Washington, DC")
+    def self.get_data(offset=0, term="restaurants", loc="Washington, DC")
         yelp = YelpAPI.new
-        data = yelp.search(term, loc)
+        data = yelp.search(term, loc, offset)
         data["businesses"]
     end
 
     def self.get_restaurants
-        get_data.each do |r|
+        restaurants = get_data
+        restaurants.concat(get_data(51))
+        restaurants.each do |r|
             Restaurant.create(yelp_id: r["id"], name: r["name"])
         end
     end
