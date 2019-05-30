@@ -25,8 +25,8 @@ class Board < ActiveRecord::Base
 
         visited_restaurant_ids = user.get_visit_list.map{ |visit| visit.restaurant_id }
 
-        sorted = restaurants.select do |restaurant|
-            !(visited_restaurant_ids.include?(restaurant.id))
+        sorted = restaurants.reject do |restaurant|
+            visited_restaurant_ids.include?(restaurant.id)
         end.sort_by{ |restaurant| restaurant.name }
 
         sorted.each_with_index do |restaurant, i|
@@ -42,9 +42,9 @@ class Board < ActiveRecord::Base
 
     def get_marked_squares(user)
         restaurant_ids = user.get_visit_list.map{ |visit| visit.restaurant_id }
-        marked = restaurant_ids.map{ |id| Square.find_by(restaurant_id: id) }
+        marked = restaurant_ids.map{ |id| Square.find_by(restaurant_id: id, board_id: self.id) }
         marked << Square.new(row: 2, column: 2)
-        return marked
+        marked.reject{ |square| square.nil? }
     end
 
     def print_board(user)
@@ -52,7 +52,7 @@ class Board < ActiveRecord::Base
 
         board = [  ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "]  ]
 
-        marked_squares = get_marked_squares(user)
+        marked_squares = self.get_marked_squares(user)
 
         marked_squares.each do |square|
             row = square.row
@@ -84,7 +84,7 @@ class Board < ActiveRecord::Base
 
         board = [["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "]]
 
-        marked_squares = get_marked_squares(user)
+        marked_squares = self.get_marked_squares(user)
 
         marked_squares.each do |square|
             row = square.row
@@ -155,7 +155,7 @@ class Board < ActiveRecord::Base
 
     def bingo?(user)
 
-        marked = get_marked_squares(user)
+        marked = self.get_marked_squares(user)
 
         bingo = diag_bingo?(marked) || cross_bingo?(marked)
 
