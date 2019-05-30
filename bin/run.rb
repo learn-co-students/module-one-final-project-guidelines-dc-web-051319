@@ -1,14 +1,5 @@
 require_relative '../config/environment'
 
-
-
-# matt = User.find_by_name("Matt")
-# matt.have_meal(Restaurant.find(Square.all.sample.restaurant_id))
-# matt.have_meal(Restaurant.find(Square.all.sample.restaurant_id))
-# Board.all.first.print_board(matt)
-
-
-# Begin UI
 Login.welcome
 user = nil
 
