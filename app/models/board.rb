@@ -15,6 +15,13 @@ class Board < ActiveRecord::Base
         end
     end
 
+    def get_marked_squares(user)
+        visits = Visit.where("user_id = ?", user.id)
+        restaurant_ids = visits.map{ |visit| visit.restaurant_id }
+        marked = restaurant_ids.map{ |id| Square.find_by(restaurant_id: id) }
+        marked << Square.new(row: 2, column: 2)
+        return marked
+    end
 
     def print_board(user)
         system "clear" or system "cls"
@@ -46,14 +53,18 @@ class Board < ActiveRecord::Base
     def print_basic_board(user)
         system "clear" or system "cls"
 
-        board = [["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   "," * ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "]]
+        board = [["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "]]
 
         marked_squares = get_marked_squares(user)
 
         marked_squares.each do |square|
             row = square.row
             column = square.column
-            board[row][column] = " X "
+            if row == 2 && column == 2
+                board[row][column] = " * "
+            else
+                board[row][column] = " X "
+            end
         end
 
         div = "---|---|---|---|---"
@@ -70,12 +81,6 @@ class Board < ActiveRecord::Base
         puts ""
     end
 
-    def get_marked_squares(user)
-        visits = Visit.where("user_id = ?", user.id)
-        restaurant_ids = visits.map{ |visit| visit.restaurant_id }
-        restaurant_ids.map{ |id| Square.find_by(restaurant_id: id) }
-    end
-
     def diag_bingo?(marked)
         n = 0
         m = 0
@@ -89,7 +94,7 @@ class Board < ActiveRecord::Base
             end
         end
 
-        n == 4 || m == 4
+        n == 5 || m == 5
     end
 
     def cross_bingo?(marked)
@@ -115,7 +120,7 @@ class Board < ActiveRecord::Base
         uniq_rows = rows.uniq.length
         uniq_columns = columns.uniq.length
 
-        c == 4 && (uniq_rows == 5 || uniq_columns == 5)
+        c == 5 && (uniq_rows == 5 || uniq_columns == 5)
     end
 
 
