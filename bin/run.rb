@@ -40,20 +40,23 @@ end
 card_name = name_card
 here = player.decks.first.cards
 
-def add_single_card(card_name)
+def add_single_card(card_name, player)
 
  here = player.decks.first.cards
   card = Card.find_by(name: card_name)
   if card
+
     here << card
     puts "You have added #{card.name}"
+    # binding.pry
   else puts "card doesnt exist"
-
-
+#
+# binding.pry
+# 0
   end
 end
 
-add_single_card(card_name)
+add_single_card(card_name, player)
 # asks user how he would like to add cards to his deck at random or by choice?
 #
 # if they decline random then user selects card by choice
