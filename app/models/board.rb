@@ -23,11 +23,10 @@ class Board < ActiveRecord::Base
             Restaurant.find_by(id: square.restaurant_id)
         end
 
-        visited_restaurants = user.get_visit_list.map{ |visit| visit.restaurant_id }
-        puts visited_restaurants
+        visited_restaurant_ids = user.get_visit_list.map{ |visit| visit.restaurant_id }
 
         sorted = restaurants.select do |restaurant|
-            !(visited_restaurants.include?(restaurant.id))
+            !(visited_restaurant_ids.include?(restaurant.id))
         end.sort_by{ |restaurant| restaurant.name }
 
         sorted.each_with_index do |restaurant, i|
