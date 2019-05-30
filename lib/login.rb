@@ -56,8 +56,8 @@ class Login
     end
 
     def self.exit
-        puts "Press ENTER to continue or 'q' to quit."
-        print "(Q)uit?: "
+        puts ""
+        print "Press ENTER to continue or 'q' to quit. "
         ans = gets.chomp.downcase
         ans == 'q' ? true : false
     end
