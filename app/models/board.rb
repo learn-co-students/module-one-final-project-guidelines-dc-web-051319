@@ -36,6 +36,7 @@ class Board < ActiveRecord::Base
         puts "Where would you like to go?"
         print "1-#{sorted.length}: "
         num = gets.chomp.to_i
+        num = num.clamp(1, sorted.length)
         num -= 1
         return sorted[num]
     end
