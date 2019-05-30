@@ -24,11 +24,11 @@ class Board < ActiveRecord::Base
         end
 
         visited_restaurants = user.get_visit_list.map{ |visit| visit.restaurant_id }
-        restaurants.select do |restaurant|
-            !(visited_restaurants.include?(restaurant.id))
-        end
+        puts visited_restaurants
 
-        sorted = restaurants.sort_by{ |restaurant| restaurant.name }
+        sorted = restaurants.select do |restaurant|
+            !(visited_restaurants.include?(restaurant.id))
+        end.sort_by{ |restaurant| restaurant.name }
 
         sorted.each_with_index do |restaurant, i|
             puts "#{i+1}. #{restaurant.name}"

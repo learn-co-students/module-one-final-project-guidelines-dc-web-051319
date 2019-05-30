@@ -38,15 +38,15 @@ class Login
 
     def self.select_board
         system "clear" or system "cls"
-        Board.all.each_with_index do |board, i|
+        list = Board.all.each_with_index do |board, i|
             puts "#{i+1}. #{board.date}"
         end
         puts ""
         puts "Please select a board."
-        print "1-#{boards.length}: "
+        print "1-#{list.length}: "
         num = gets.chomp.to_i
         num -= 1
-        boards[num]
+        list[num]
     end
 
     def self.config_board
