@@ -23,6 +23,7 @@ class Admin
     end
 
     def self.make_board
+        puts ""
         print "Please enter a date for your board: "
         date = gets.chomp
         board = Board.create(date: date)
@@ -38,12 +39,20 @@ class Admin
         case choice
         when 'c'
             self.clear_db
+            puts "Done."
+            sleep(1.5)
         when 'r'
             self.get_restaurants
+            puts "Done."
+            sleep(1.5)
         when 'b'
             self.make_board
+            puts "Done."
+            sleep(1.5)
         when 'u'
             self.make_users
+            puts "Done."
+            sleep(1.5)
         when 'p'
             binding.pry
         end
