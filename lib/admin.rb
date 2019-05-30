@@ -17,8 +17,12 @@ class Admin
     end
 
     def self.get_restaurants
-        restaurants = get_data
+        restaurants = get_data 
         restaurants.concat(get_data(51))
+        restaurants.concat(get_data(101))
+        restaurants.concat(get_data(151))
+        restaurants.concat(get_data(201))
+        restaurants.concat(get_data(251))
         restaurants.each do |r|
             Restaurant.create(yelp_id: r["id"], name: r["name"])
         end
