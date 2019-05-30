@@ -26,18 +26,23 @@ class Board < ActiveRecord::Base
     def print_board(user)
         system "clear" or system "cls"
 
-        board = [  ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ", "\u2B50  ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "]  ]
+        board = [  ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "], ["   ","   ","   ","   ","   "]  ]
 
         marked_squares = get_marked_squares(user)
 
         marked_squares.each do |square|
             row = square.row
             column = square.column
-            board[row][column] = " \u274C "
+            if row == 2 && column == 2
+                board[row][column] = " \u2B50 "
+            else
+                board[row][column] = " \u274C "
+            end
         end
 
+    
         div = "\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501\u254B\u2501-\u2501"
-
+        puts ""
         puts board[0].join("\u2503")
         puts div
         puts board[1].join("\u2503")
