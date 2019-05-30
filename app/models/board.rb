@@ -6,7 +6,7 @@ class Board < ActiveRecord::Base
         for i in 0..4 do
             for j in 0..4 do
                 if i == 2 && j == 2
-                    "free"
+                    "free" #Square.new(restaurant_id: nil , board_id: self.id, row: i, column: j).save
                 else
                     id = ids.pop
                     Square.new(restaurant_id: id, board_id: self.id, row: i, column: j).save
@@ -40,6 +40,7 @@ class Board < ActiveRecord::Base
         puts board[3].join("\u2503")
         puts div
         puts board[4].join("\u2503")
+        puts ""
     end
 
     def print_basic_board(user)
@@ -66,13 +67,13 @@ class Board < ActiveRecord::Base
         puts board[3].join("|")
         puts div
         puts board[4].join("|")
-end
+        puts ""
+    end
 
     def get_marked_squares(user)
         visits = Visit.where("user_id = ?", user.id)
         restaurant_ids = visits.map{ |visit| visit.restaurant_id }
-        marked_squares = restaurant_ids.map{ |id| Square.find_by(restaurant_id: id) }
-        return marked_squares
+        restaurant_ids.map{ |id| Square.find_by(restaurant_id: id) }
     end
 
     def diag_bingo?(marked)
@@ -80,7 +81,7 @@ end
         m = 0
 
         marked.each do |square|
-            case 
+            case
             when square.row == square.column
                 n += 1
             when square.row + square.column == 4
@@ -88,31 +89,33 @@ end
             end
         end
 
-        n == 4 || m == 4 
+        n == 4 || m == 4
     end
 
     def cross_bingo?(marked)
-        rows = [2]
-        columns = [2]
+        rows = []
+        columns = []
 
         marked.each do |square|
             rows << square.row
             columns << square.column
         end
 
+        c = 0
+        for i in 0..4 do
+            for j in 0..4 do
+                case
+                when rows.count(i) > c
+                    c = rows.count(i)
+                when columns.count(j) > c
+                    c = columns.count(j)
+                end
+            end
+        end
         uniq_rows = rows.uniq.length
         uniq_columns = columns.uniq.length
 
-        # Horizontal Bingo
-        row_mode = rows.max_by{ |i| rows.count(i) }
-        return true if uniq_columns == 5 && rows.count(row_mode) == 5
-
-        # # Vertical Bingo
-        column_mode = columns.max_by{ |j| columns.count(j) }
-        return true if uniq_rows == 5 && columns.count(column_mode) == 5
-
-        # No Bingo
-        return false
+        c == 4 && (uniq_rows == 5 || uniq_columns == 5)
     end
 
 
@@ -125,7 +128,7 @@ end
         if bingo
             puts "BINGO!!!"
         else
-            puts "So close... Maybe next time!?" 
+            puts "So close... Maybe next time!?"
         end
     end
 

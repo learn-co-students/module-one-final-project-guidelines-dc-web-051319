@@ -26,7 +26,7 @@ class Login
     def self.new_user(name)
         puts "It appears that you haven't played before."
         puts "Would you like to register as a new user?"
-        print "(Y)es/(N)o:  "
+        print "(Y)es/(N)o: "
         ans = gets.chomp.downcase
         if ans == 'y'
             User.new(name: name).save
@@ -35,4 +35,16 @@ class Login
         end
     end
 
+    def self.config_board
+        print "Press ENTER for a regular or 'b' for a (b)asic board:"
+        ans = gets.chomp.downcase
+        ans == 'b' ? true : false
+    end
+
+    def self.exit
+        puts "Press ENTER to continue or 'q' to quit."
+        print "(Q)uit?: "
+        ans = gets.chomp.downcase
+        ans == 'q' ? true : false
+    end
 end

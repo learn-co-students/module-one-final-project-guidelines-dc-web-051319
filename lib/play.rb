@@ -5,8 +5,6 @@ require_relative '../app/models/square.rb'
 require_relative '../app/models/board.rb'
 require_relative '../app/models/visit.rb'
 
-
-
 class Play
 
     def self.print_restaurant_list
