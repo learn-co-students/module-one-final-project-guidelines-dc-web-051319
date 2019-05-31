@@ -10,7 +10,17 @@ class Restaurant < ActiveRecord::Base
 
     def parse_info(hash)
         system "clear" or system "cls"
-        if hash["hours"][0]["is_open_now"]
+
+        open = false
+        if hash.has_key?("hours")
+            open = hash["hours"][0]["is_open_now"]
+        end
+
+        if hash.has_key?("is_closed")
+            open = !(hash["is_closed"])
+        end
+
+        if open
             puts "OPEN"
         else
             puts "CLOSED"
