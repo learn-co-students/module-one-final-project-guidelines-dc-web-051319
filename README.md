@@ -27,5 +27,5 @@ Users have the option to display a basic board in plain text or a fancy board wi
 ### Fancy Board
 
 <p align="center">
-  <img src="https://github.com/m4thayus/module-one-final-project-guidelines-dc-web-051319/img/fancy.png?raw=true" alt="Fancy Board"/>
+  <img src="https://github.com/m4thayus/module-one-final-project-guidelines-dc-web-051319/blob/master/img/fancy.png?raw=true" alt="Fancy Board"/>
 </p>
