@@ -6,7 +6,7 @@ class Board < ActiveRecord::Base
         for i in 0..4 do
             for j in 0..4 do
                 if i == 2 && j == 2
-                    "free" #Square.new(restaurant_id: nil , board_id: self.id, row: i, column: j).save
+                    "free"
                 else
                     id = ids.pop
                     Square.new(restaurant_id: id, board_id: self.id, row: i, column: j).save
@@ -28,6 +28,11 @@ class Board < ActiveRecord::Base
         sorted = restaurants.reject do |restaurant|
             visited_restaurant_ids.include?(restaurant.id)
         end.sort_by{ |restaurant| restaurant.name }
+
+        if sorted.length < 1
+            puts "You have visited all the restaurants on this board. Come back next month to play again!"
+            abort
+        end
 
         sorted.each_with_index do |restaurant, i|
             puts "#{i+1}. #{restaurant.name}"
