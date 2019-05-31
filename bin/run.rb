@@ -1,106 +1,72 @@
 require_relative '../config/environment'
 require_relative "../lib/api_communicator.rb"
 require_relative "../lib/command_line_interface.rb"
+require 'tty-prompt'
 
-name_input = welcome
 #welcomes user & gets user input
-player = make_player(name_input)
+name_input = welcome
+
+puts "\n"
+
 #takes input to create user
+player = make_player(name_input)
+
+
+#prompts deck name
 deck_input = name_deck
-#prompts deck namee
-deck = make_deck(deck_input, player.id)
+
 # creates deck instance
-def make_carddeck(player)
-  empty_deck =  player.decks.first.cards
-    x = Card.all.sample(40)
-    x.each do |card|
-      empty_deck << card
+deck = make_deck(deck_input, player.id)
 
-    end
-
-end
 
 make_carddeck(player)
 
+puts "\n"
+
 time_to_build
 
-def here_deck(player)
-  here = player.decks.first.cards
-  here.each {|cards| puts cards.name}
-end
-
-
-
 here_deck(player)
-def name_card
-  puts "Choose a card to Put into your deck"
-  gets.chomp
-end
 
+puts "\n"
 
+card_to_add = add_card_prompt
+add = add_single_card(card_to_add, player)
 
-card_name = name_card
-here = player.decks.first.cards
-
-def add_single_card(card_name, player)
-
- here = player.decks.first.cards
-  card = Card.find_by(name: card_name)
-  if card
-
-    here << card
-    puts "You have added #{card.name}"
-    # binding.pry
-  else puts "card doesnt exist"
-#
-# binding.pry
-# 0
-  end
-end
-
-add_single_card(card_name, player)
-
-def remove_card(card_name, player)
-  here = player.decks.first.cards
-   card = here.find_by(name: card_name)
-   if card
-     here.delete(card)
-     puts "You have deleted #{card.name}"
-   else puts "Either you don't want to remove a card or it doesn't exist in your deck"
-   end
-end
-
-def remove_card_prompt
- puts  "Time to remove a card"
-  gets.chomp
-end
+puts "\n"
 
 card_to_delete = remove_card_prompt
-
 remove_card(card_to_delete, player)
 
 
+atk = find_highest_attack(player)
 
+defense = find_highest_defense(player)
 
+lvl = find_highest_level(player)
 
+prompt = TTY::Prompt.new
+
+puts "\n"
+
+choices = {"Card With Highest Attack" => atk, "Card With Highest Defense" => defense, "Card With Highest Level" => lvl}
+selected = prompt.select("Here are some card stats you can pick.",choices)
+
+puts "Name☟"
+p selected.name
+puts "Type☟"
+p selected.kind
+puts "Race☟"
+p selected.race
+puts "Description☟"
+p selected.desc
+puts "Attack☟"
+p selected.attack
+puts "Defense☟"
+p selected.defense
+puts "Level☟"
+p selected.level
+
+prompt = TTY::Prompt.new
 # binding.pry
-# 0
 
-
-
-
-
-# welcome
-# input = gets.chomp
-# player = Player.find_or_create_by(name: input)
-# name_deck
-# deck_name = gets.chomp
-# deck = Deck.find_or_create_by(name: deck_name, player_id: player.id)
-# time_to_build
-# deck_with_cards = []
-
-
-# puts  "Hey Time build your deck, how many monster cards would you like?"
-
-# y = gets.chomp
-# get_monster_cards_from_api(y)
+"0"
