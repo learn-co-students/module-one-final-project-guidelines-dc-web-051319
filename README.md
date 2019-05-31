@@ -26,4 +26,4 @@ Users have the option to display a basic board in plain text or a fancy board wi
 
 ### Fancy Board
 
-![Fancy](./img/fancy.png)
+![Fancy](img/fancy.png?raw=true)
