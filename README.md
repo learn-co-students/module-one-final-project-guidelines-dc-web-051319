@@ -12,7 +12,8 @@ Users and their visits, restaurants, and board configurations are persistent eve
 
 1. Clone the repository on your local environment.
 2. `cd` into the source directory and run `bundle install`.
-3. Execute the run file with `ruby bin/run.rb`.
+3. Setup database with `rake db:migrate`.
+4. Execute the run file with `ruby bin/run.rb`.
 
 *Hint: On first run, login with the name `admin` to access the admin panel and  populate the database.*
 
