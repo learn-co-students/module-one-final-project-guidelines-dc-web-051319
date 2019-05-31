@@ -14,4 +14,4 @@ Users and their visits, restaurants, and board configurations are persistent eve
 2. `cd` into the source directory and run `bundle install`.
 3. Execute the run file with `ruby bin/run.rb`.
 
-*Hint: On first run, login with the name `admin` to access the admin panel and  populate the database.
+*Hint: On first run, login with the name `admin` to access the admin panel and  populate the database.*
