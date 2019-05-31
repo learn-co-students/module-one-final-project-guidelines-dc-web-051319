@@ -41,6 +41,12 @@ class Login
         list = Board.all.each_with_index do |board, i|
             puts "#{i+1}. #{board.date}"
         end
+
+        if list.length < 1
+            puts "No boards exist. Please contact your administrator."
+            abort
+        end
+
         puts ""
         puts "Please select a board."
         print "1-#{list.length}: "
