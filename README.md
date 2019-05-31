@@ -22,10 +22,8 @@ Users have the option to display a basic board in plain text or a fancy board wi
 
 ### Basic Board
 
-![Basic]()
+![Basic](https://github.com/m4thayus/module-one-final-project-guidelines-dc-web-051319/blob/master/img/basic.png?raw=true)
 
 ### Fancy Board
 
-<p align="center">
-  <img src="https://github.com/m4thayus/module-one-final-project-guidelines-dc-web-051319/blob/master/img/fancy.png?raw=true" alt="Fancy Board"/>
-</p>
+![Fancy Board](https://github.com/m4thayus/module-one-final-project-guidelines-dc-web-051319/blob/master/img/fancy.png?raw=true)
