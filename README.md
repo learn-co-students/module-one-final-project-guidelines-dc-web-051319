@@ -15,3 +15,15 @@ Users and their visits, restaurants, and board configurations are persistent eve
 3. Execute the run file with `ruby bin/run.rb`.
 
 *Hint: On first run, login with the name `admin` to access the admin panel and  populate the database.*
+
+## Board Types
+
+Users have the option to display a basic board in plain text or a fancy board with Unicode characters. As seen below.
+
+### Basic Board
+
+![Basic]()
+
+### Fancy Board
+
+![Fancy](img/fancy.png)
