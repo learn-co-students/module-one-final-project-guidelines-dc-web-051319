@@ -16,11 +16,17 @@ quit = false
 until quit
     restaurant = board.print_restaurant_list(user)
 
-    user.have_meal(restaurant)
+    restaurant.get_info
 
-    basic ? board.print_basic_board(user) : board.print_board(user)
+    if restaurant.confirm
 
-    board.bingo?(user)
+        user.have_meal(restaurant)
 
-    quit = Login.exit
+        basic ? board.print_basic_board(user) : board.print_board(user)
+
+        board.bingo?(user)
+
+        quit = Login.exit
+        
+    end
 end
