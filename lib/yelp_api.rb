@@ -6,7 +6,7 @@ class YelpAPI
 # Place holders for Yelp Fusion's API key. Grab it
 # from https://www.yelp.com/developers/v3/manage_app
 key = ""
-File.open("../yelp_api_key.txt", 'r') do |f|
+File.open("yelp_api_key.txt", 'r') do |f|
   f.each_line do |line|
     key = line
   end
